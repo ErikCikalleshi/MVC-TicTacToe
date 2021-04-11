@@ -2,29 +2,40 @@ package com.example.tic_tac_toe.Model
 
 import android.content.Context
 import android.content.res.Resources
+import android.widget.EditText
+import com.example.tic_tac_toe.Controller.MainActivity
 import com.example.tic_tac_toe.R
 
 
-class TicTacToeGame(context: Context) {
+class TicTacToeGame(context: Context){
 
     private enum class GameState {
         X_TURN, O_TURN, X_WIN, O_WIN, TIE_GAME
     }
 
-    private var gameState: GameState? = null
-
-    private val boardArray = Array(3) { IntArray(3) }
-    private lateinit var context: Context
     private val MARK_NONE = 0
     private val MARK_X = 1
     private val MARK_O = 2
+
+    private var gameState: GameState? = null
+
+    private val boardArray = Array(3) { IntArray(3) }
+
+    private var context: Context
+
     init {
         this.context = context
         resetGame()
     }
 
-    private fun resetGame() {
+    fun resetGame() {
         this.gameState = GameState.X_TURN;
+
+        for (row in 0..2){
+            for (col in 0..2){
+                this.boardArray[row][col] = MARK_NONE
+            }
+        }
     }
 
     fun pressedButtonAt(row: Int, col: Int) {
@@ -98,7 +109,7 @@ class TicTacToeGame(context: Context) {
         if (row in 0..2 && col>=0 && col < 3)
         {
             if (this.boardArray[row][col] == MARK_X) {
-                return "X";
+                return "X"
             } else if (this.boardArray[row][col] == MARK_O) {
                 return "O";
             }
@@ -110,10 +121,10 @@ class TicTacToeGame(context: Context) {
         var gameStateLabel = ""
         val r: Resources = context.resources
         gameStateLabel = when (gameState) {
-            GameState.X_TURN -> r.getString(R.string.x_turn)
-            GameState.O_TURN -> r.getString(R.string.o_turn)
-            GameState.X_WIN -> r.getString(R.string.x_win)
-            GameState.O_WIN -> r.getString(R.string.o_win)
+            GameState.X_TURN -> MainActivity.instance.findViewById<EditText>(R.id.p1).text.toString()
+            GameState.O_TURN -> MainActivity.instance.findViewById<EditText>(R.id.p2).text.toString()
+            GameState.X_WIN ->MainActivity.instance.findViewById<EditText>(R.id.p1).text.toString() + " Wins"
+            GameState.O_WIN -> MainActivity.instance.findViewById<EditText>(R.id.p1).text.toString() + " Wins"
             else -> r.getString(R.string.tie_game)
         }
         return gameStateLabel

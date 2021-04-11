@@ -8,4 +8,7 @@ interface Interface {
         fun onClicked(x: View)
     }
 
+    interface RestartGame{
+        fun restartView()
+    }
 }
