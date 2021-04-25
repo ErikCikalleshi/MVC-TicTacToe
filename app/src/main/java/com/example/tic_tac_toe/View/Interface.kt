@@ -1,14 +1,13 @@
 package com.example.tic_tac_toe.View
 
-import android.view.View
-
 interface Interface {
 
-    interface AddListener{
-        fun onClicked(x: View)
+    interface OnClickedListener{
+        fun onClicked(v: android.view.View)
     }
 
-    interface RestartGame{
+    interface OnRestartListener{
         fun restartView()
     }
+
 }

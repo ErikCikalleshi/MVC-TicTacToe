@@ -70,19 +70,26 @@
                 android:id="@+id/button00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/space" />
+                android:background="@drawable/border"
+                android:text="@string/space"
+
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/button01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/space" />
+                android:background="@drawable/border"
+                android:text="@string/space"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/button02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/space" />
+                android:background="@drawable/border"
+                android:text="@string/space"
+                android:textColor="@color/black" />
         </TableRow>
 
         <TableRow
@@ -93,19 +100,25 @@
                 android:id="@+id/button10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/space" />
+                android:background="@drawable/border"
+                android:text="@string/space"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/button11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/space" />
+                android:background="@drawable/border"
+                android:text="@string/space"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/button12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/space" />
+                android:background="@drawable/border"
+                android:text="@string/space"
+                android:textColor="@color/black" />
         </TableRow>
 
         <TableRow
@@ -116,19 +129,25 @@
                 android:id="@+id/button20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/space" />
+                android:background="@drawable/border"
+                android:text="@string/space"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/button21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/space" />
+                android:background="@drawable/border"
+                android:text="@string/space"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/button22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/space" />
+                android:background="@drawable/border"
+                android:text="@string/space"
+                android:textColor="@color/black" />
         </TableRow>
 
     </TableLayout>
@@ -154,6 +173,26 @@
         android:layout_marginBottom="43dp"
         android:text="@string/new_game"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/p1Points"
+        android:layout_width="107dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="134dp"
+        android:text="@string/zero"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/p2Points"
+        android:layout_width="107dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="134dp"
+        android:text="@string/zero"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
