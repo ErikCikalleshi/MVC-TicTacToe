@@ -177,21 +177,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/p1Points"
+        android:id="@+id/p1points"
         android:layout_width="107dp"
         android:layout_height="23dp"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="134dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="132dp"
         android:text="@string/zero"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/p2Points"
+        android:id="@+id/p2points"
         android:layout_width="107dp"
         android:layout_height="23dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="134dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="132dp"
         android:text="@string/zero"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

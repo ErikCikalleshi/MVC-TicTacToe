@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import com.example.tic_tac_toe.Controller.MainActivity
 import com.example.tic_tac_toe.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class TicTacToeGame(context: Context){
@@ -14,6 +15,8 @@ class TicTacToeGame(context: Context){
     private enum class GameState {
         X_TURN, O_TURN, X_WIN, O_WIN, TIE_GAME
     }
+
+    var stop_db = false
 
     private val MARK_NONE = 0
     private val MARK_X = 1
@@ -27,18 +30,10 @@ class TicTacToeGame(context: Context){
     private val player = mutableMapOf<String, Int>()
     init {
         this.context = context
+
         resetGame()
     }
 
-
-    fun saveUser(player1: String, player2: String) {
-        if(player1 !in player){
-            player[player1] = 0
-        }
-        if(player2 !in player){
-            player[player2] = 0
-        }
-    }
 
     fun resetGame() {
         this.gameState = GameState.X_TURN;
@@ -86,7 +81,7 @@ class TicTacToeGame(context: Context){
     }
 
     private fun check(mark: Int): Boolean {
-        var win = true
+        var win: Boolean
         //Horizontal check
         for (row in 0..2){
             win = true
@@ -112,7 +107,7 @@ class TicTacToeGame(context: Context){
         }
         //diagonal
         if(this.boardArray[0][0] == mark && this.boardArray[1][1] == mark && this.boardArray[2][2] == mark) return true
-        if(this.boardArray[1][0] == mark && this.boardArray[1][1] == mark && this.boardArray[0][2] == mark) return true
+        if(this.boardArray[0][2] == mark && this.boardArray[1][1] == mark && this.boardArray[2][0] == mark) return true
 
         return false
     }
@@ -129,10 +124,6 @@ class TicTacToeGame(context: Context){
         return ""
     }
 
-    fun addPointToWinner(){
-
-    }
-
     fun stringForGameState(): String {
         var gameStateLabel = ""
         val r: Resources = context.resources
@@ -140,24 +131,34 @@ class TicTacToeGame(context: Context){
         val p2 = MainActivity.instance.findViewById<EditText>(R.id.p2).text.toString()
         var points = 0
         gameStateLabel = when (gameState) {
-            GameState.X_TURN -> p1
-            GameState.O_TURN -> p2
+            GameState.X_TURN -> {
+                stop_db = false
+                p1
+            }
+            GameState.O_TURN -> {
+                stop_db = false
+                p2
+            }
             GameState.X_WIN -> {
-                points = MainActivity.db.playerDao().getPlayersPoint(p1)
-                MainActivity.db.playerDao().updatePlayerPoints(p1, points + 1)
-                MainActivity.instance.findViewById<TextView>(R.id.p2Points).text = MainActivity.db.playerDao().getPlayersPoint(p1).toString()
+                if(!stop_db){
+                    points = MainActivity.db.playerDao().getPlayersPoint(p1)
+                    MainActivity.db.playerDao().updatePlayerPoints(p1, points + 1)
+                    MainActivity.instance.findViewById<TextView>(R.id.p1points).text = MainActivity.db.playerDao().getPlayersPoint(p1).toString()
+                }
+                stop_db = true
                 "$p1 Wins"
             }
             GameState.O_WIN -> {
-                //player[p2] = player[p2]!! + 1
                 points = MainActivity.db.playerDao().getPlayersPoint(p2)
-                MainActivity.db.playerDao().updatePlayerPoints(p2, points + 1)
-                MainActivity.instance.findViewById<TextView>(R.id.p2Points).text = MainActivity.db.playerDao().getPlayersPoint(p2).toString()
+                if(!stop_db){
+                    MainActivity.db.playerDao().updatePlayerPoints(p2, MainActivity.db.playerDao().getPlayersPoint(p2) + 1)
+                    MainActivity.instance.findViewById<TextView>(R.id.p2points).text = MainActivity.db.playerDao().getPlayersPoint(p2).toString()
+                }
+                stop_db = true
                 "$p2 Wins"
             }
             else -> r.getString(R.string.tie_game)
         }
-        Log.i("Points", MainActivity.db.playerDao().getPlayersPoint(p1).toString())
         return gameStateLabel
     }
 

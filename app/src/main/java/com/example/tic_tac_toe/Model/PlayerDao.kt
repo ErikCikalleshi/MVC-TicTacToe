@@ -12,9 +12,12 @@ interface PlayerDao {
     @Query("UPDATE Player SET points = :p where name == :n")
     fun updatePlayerPoints(n: String, p: Int)
 
-    @Query("SELECT name FROM Player WHERE name == :name")
-    fun getPlayerByName(name: String): String
-
     @Query("SELECT points FROM Player WHERE name == :name")
     fun getPlayersPoint(name: String): Int
+
+    @Query("DELETE from Player where name == :n")
+    fun deletePlayer(n: String)
+
+    @Query("SELECT name from Player where name == :n")
+    fun getPlayerName(n: String): String
 }

@@ -10,4 +10,8 @@ interface Interface {
         fun restartView()
     }
 
+    interface LoadBoard{
+        fun loadBoard()
+    }
+
 }
