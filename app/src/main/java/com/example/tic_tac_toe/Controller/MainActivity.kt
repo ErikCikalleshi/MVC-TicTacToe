@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
         instance = this
 
         game = TicTacToeGame(this)
-        gameStateTextView.text = game.stringForGameState()
+        gameStateTextView.text = game.stringForGameState().capitalize(Locale.ROOT)
 
         if (checkDuplicate(p1) && checkDuplicate(p2)) {
             player1 = p1.text.toString().toLowerCase(Locale.ROOT)
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
             if (checkDuplicate(p1)) {
                 player1 = p1.text.toString().toLowerCase(Locale.ROOT)
                 p1points.text = displayPoints(player1)
-                gameStateTextView.text = game.stringForGameState()
+                gameStateTextView.text = game.stringForGameState().capitalize(Locale.ROOT)
             }
         }
 
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
             if (checkDuplicate(p2)) {
                 player2 = p2.text.toString().toLowerCase(Locale.ROOT)
                 p2points.text = displayPoints(player2)
-                gameStateTextView.text = game.stringForGameState()
+                gameStateTextView.text = game.stringForGameState().capitalize(Locale.ROOT)
             }
         }
         loadBoard()
@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
                 buttons[row][col].text = ""
             }
         }
-        gameStateTextView.text = game.stringForGameState()
+        gameStateTextView.text = game.stringForGameState().capitalize(Locale.ROOT)
         p1points.text = displayPoints(player1)
         p2points.text = displayPoints(player2)
     }
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
                 buttons[row][col].text = game.setStringButtonAt(row, col)
             }
         }
-        gameStateTextView.text = game.stringForGameState()
+        gameStateTextView.text = game.stringForGameState().capitalize(Locale.ROOT)
     }
 
     override fun loadBoard() {
