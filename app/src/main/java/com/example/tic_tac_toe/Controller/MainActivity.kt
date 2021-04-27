@@ -61,8 +61,9 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
         p2.setOnFocusChangeListener { _, _ ->
             if (checkDuplicate(p2)) {
                 p2points.text = displayPoints(p2.text.toString())
+                //////////////////////////////////////////////////////////////////////////////fix this + who is winning should turn
+                gameStateTextView.text = game.stringForGameState()
             }
-
         }
 
         loadBoard()

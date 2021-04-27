@@ -30,13 +30,16 @@ class TicTacToeGame(context: Context){
     private val player = mutableMapOf<String, Int>()
     init {
         this.context = context
-
         resetGame()
     }
 
 
     fun resetGame() {
-        this.gameState = GameState.X_TURN;
+        if(this.gameState == GameState.X_WIN){
+            this.gameState = GameState.O_TURN;
+        }else{
+            this.gameState = GameState.X_TURN;
+        }
 
         for (row in 0..2){
             for (col in 0..2){
