@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.example.tic_tac_toe.Controller.MainActivity
 import com.example.tic_tac_toe.R
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class TicTacToeGame(context: Context){
@@ -130,8 +131,8 @@ class TicTacToeGame(context: Context){
     fun stringForGameState(): String {
         var gameStateLabel = ""
         val r: Resources = context.resources
-        val p1 = MainActivity.instance.findViewById<EditText>(R.id.p1).text.toString()
-        val p2 = MainActivity.instance.findViewById<EditText>(R.id.p2).text.toString()
+        var p1 = MainActivity.instance.p1.text.toString().toLowerCase(Locale.ROOT)
+        var p2 = MainActivity.instance.p2.text.toString().toLowerCase(Locale.ROOT)
         var points = 0
         gameStateLabel = when (gameState) {
             GameState.X_TURN -> {
@@ -146,15 +147,17 @@ class TicTacToeGame(context: Context){
                 if(!stop_db){
                     points = MainActivity.db.playerDao().getPlayersPoint(p1)
                     MainActivity.db.playerDao().updatePlayerPoints(p1, points + 1)
+                    Log.e("Points", points.toString())
                     MainActivity.instance.findViewById<TextView>(R.id.p1points).text = MainActivity.db.playerDao().getPlayersPoint(p1).toString()
                 }
                 stop_db = true
                 "$p1 Wins"
             }
             GameState.O_WIN -> {
-                points = MainActivity.db.playerDao().getPlayersPoint(p2)
                 if(!stop_db){
-                    MainActivity.db.playerDao().updatePlayerPoints(p2, MainActivity.db.playerDao().getPlayersPoint(p2) + 1)
+                    points = MainActivity.db.playerDao().getPlayersPoint(p2)
+                    MainActivity.db.playerDao().updatePlayerPoints(p2, points + 1)
+                    Log.e("Points", points.toString())
                     MainActivity.instance.findViewById<TextView>(R.id.p2points).text = MainActivity.db.playerDao().getPlayersPoint(p2).toString()
                 }
                 stop_db = true

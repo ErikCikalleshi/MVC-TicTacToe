@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
     private var buttons = arrayOf<ArrayList<Button>>(arrayListOf(), arrayListOf(), arrayListOf())
     private lateinit var game: TicTacToeGame;
 
+    private lateinit var player1: String
+    private lateinit var player2: String
 
     // instance for class TicTacToeGame
     companion object {
@@ -40,10 +42,12 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
         game = TicTacToeGame(this)
         gameStateTextView.text = game.stringForGameState()
 
-       if(checkDuplicate(p1) || checkDuplicate(p2)){
-           p1points.text = displayPoints(p1.text.toString())
-           p2points.text = displayPoints(p2.text.toString())
-       }
+        if (checkDuplicate(p1) && checkDuplicate(p2)) {
+            player1 = p1.text.toString().toLowerCase(Locale.ROOT)
+            player2 = p2.text.toString().toLowerCase(Locale.ROOT)
+            p1points.text = displayPoints(player1)
+            p2points.text = displayPoints(player2)
+        }
         newGameButton.setOnClickListener {
             restartView()
         }
@@ -53,34 +57,37 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
         p2points.text = displayPoints(p2.text.toString())
 
 
-        p1.setOnFocusChangeListener { _, _ ->
+        add1.setOnClickListener {
             if (checkDuplicate(p1)) {
-                p1points.text = displayPoints(p1.text.toString())
-            }
-        }
-        p2.setOnFocusChangeListener { _, _ ->
-            if (checkDuplicate(p2)) {
-                p2points.text = displayPoints(p2.text.toString())
-                //////////////////////////////////////////////////////////////////////////////fix this + who is winning should turn
+                player1 = p1.text.toString().toLowerCase(Locale.ROOT)
+                p1points.text = displayPoints(player1)
                 gameStateTextView.text = game.stringForGameState()
             }
         }
 
+        add2.setOnClickListener {
+            if (checkDuplicate(p2)) {
+                player2 = p2.text.toString().toLowerCase(Locale.ROOT)
+                p2points.text = displayPoints(player2)
+                gameStateTextView.text = game.stringForGameState()
+            }
+        }
         loadBoard()
-
     }
 
     private fun checkDuplicate(player: EditText): Boolean {
         if (db.playerDao().getPlayerName(player.text.toString().toLowerCase(Locale.ROOT)) != player.text.toString().toLowerCase(Locale.ROOT)) {
             db.playerDao().insertPlayer(player.text.toString().toLowerCase(Locale.ROOT), 0)
+            Log.e("Error", "false")
             return false
         }
+        Log.e("Error", "true")
         return true
     }
 
     private fun displayPoints(player: String): String {
-        val x = db.playerDao().getPlayersPoint(db.playerDao().getPlayerName(player)).toString()
-        Log.e("Poi", x)
+        var x = db.playerDao().getPlayersPoint(db.playerDao().getPlayerName(player)).toString()
+        Log.e("Error", x)
         return x
     }
 
@@ -92,8 +99,8 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
             }
         }
         gameStateTextView.text = game.stringForGameState()
-        p1points.text = displayPoints(p1.text.toString())
-        p2points.text = displayPoints(p2.text.toString())
+        p1points.text = displayPoints(player1)
+        p2points.text = displayPoints(player2)
     }
 
     override fun onClicked(v: View) {
