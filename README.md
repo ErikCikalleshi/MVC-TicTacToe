@@ -29,28 +29,29 @@ Controller:
         lateinit var db: AppDatabase
     }
 ```
-Braucht man für dem Model
+**Static** für den Model
 
 In der **onCreate()** Methode wird die Datenbank inizialisiert und das Spielfeld zu erstellen. 
-Die **checkDuplicate()** sucht in der Datenbank für Duplikate und wenn es keine findet, dann werden die Spieler hinzugefügt.
-
-* Jedes Mal, wenn Sie einen Radio-Button oder einen TextInput drücken, wird die **Operation()** Funktion aufgerufen.
-* Mit **radioGroup.chechRadioButtonid** können Sie herausfinden, welcher Radiobutton ausgewählt wurde.
-* Wenn die Schaltfläche "Historie" angeklickt wird, dann wird zum zweiten Bildschirm gesprungen und alle berechneten Listendaten werden zusammen mitgesendet + ob der Switch-Save-Result aktiviert ist 
 
 ## How to use
 
-Wählen Sie eine Operation aus und geben Sie zwei Zahlen ein.
+Predifined Users
 
-![FirstScreen](firstGif.gif)
+![MaxMorit](max_moritz.gif)
 
-![SecondScreen](thirdGif.gif)
+With new players
+
+![SecondScreen](new Player)
 
 ## Features
 
-![Features](firstPic.png)
+### Change Names
 
-### Save Result
+![change_names](change_names.gif)
+
+**Remember**: Um den Spieler erfolgreich zu wechseln, muss man auf dem **+** Button klicken.
+
+### Switch Player when winning
 
 ![Switch](secondGif.gif)
 
