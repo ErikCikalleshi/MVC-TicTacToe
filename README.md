@@ -41,5 +41,5 @@ With new players
 
 ### Switch Player when winning
 
-![Switch](secondGif.gif)
+![Switch](switch_player.gif)
 
