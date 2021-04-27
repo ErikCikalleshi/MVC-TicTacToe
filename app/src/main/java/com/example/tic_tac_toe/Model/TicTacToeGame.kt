@@ -17,7 +17,7 @@ class TicTacToeGame(context: Context){
         X_TURN, O_TURN, X_WIN, O_WIN, TIE_GAME
     }
 
-    var stop_db = false
+    private var stop_db = false
 
     private val MARK_NONE = 0
     private val MARK_X = 1
@@ -122,7 +122,7 @@ class TicTacToeGame(context: Context){
             if (this.boardArray[row][col] == MARK_X) {
                 return "X"
             } else if (this.boardArray[row][col] == MARK_O) {
-                return "O";
+                return "O"
             }
         }
         return ""
@@ -131,8 +131,8 @@ class TicTacToeGame(context: Context){
     fun stringForGameState(): String {
         var gameStateLabel = ""
         val r: Resources = context.resources
-        var p1 = MainActivity.instance.p1.text.toString().toLowerCase(Locale.ROOT)
-        var p2 = MainActivity.instance.p2.text.toString().toLowerCase(Locale.ROOT)
+        val p1 = MainActivity.instance.p1.text.toString().toLowerCase(Locale.ROOT)
+        val p2 = MainActivity.instance.p2.text.toString().toLowerCase(Locale.ROOT)
         var points = 0
         gameStateLabel = when (gameState) {
             GameState.X_TURN -> {
@@ -147,7 +147,6 @@ class TicTacToeGame(context: Context){
                 if(!stop_db){
                     points = MainActivity.db.playerDao().getPlayersPoint(p1)
                     MainActivity.db.playerDao().updatePlayerPoints(p1, points + 1)
-                    Log.e("Points", points.toString())
                     MainActivity.instance.findViewById<TextView>(R.id.p1points).text = MainActivity.db.playerDao().getPlayersPoint(p1).toString()
                 }
                 stop_db = true
@@ -157,7 +156,6 @@ class TicTacToeGame(context: Context){
                 if(!stop_db){
                     points = MainActivity.db.playerDao().getPlayersPoint(p2)
                     MainActivity.db.playerDao().updatePlayerPoints(p2, points + 1)
-                    Log.e("Points", points.toString())
                     MainActivity.instance.findViewById<TextView>(R.id.p2points).text = MainActivity.db.playerDao().getPlayersPoint(p2).toString()
                 }
                 stop_db = true

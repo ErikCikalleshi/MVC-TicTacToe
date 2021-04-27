@@ -3,7 +3,6 @@ package com.example.tic_tac_toe.Controller
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -53,8 +52,8 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
         }
 
 
-        p1points.text = displayPoints(p1.text.toString())
-        p2points.text = displayPoints(p2.text.toString())
+        p1points.text = displayPoints(player1)
+        p2points.text = displayPoints(player2)
 
 
         add1.setOnClickListener {
@@ -78,17 +77,13 @@ class MainActivity : AppCompatActivity(), Interface.OnClickedListener, Interface
     private fun checkDuplicate(player: EditText): Boolean {
         if (db.playerDao().getPlayerName(player.text.toString().toLowerCase(Locale.ROOT)) != player.text.toString().toLowerCase(Locale.ROOT)) {
             db.playerDao().insertPlayer(player.text.toString().toLowerCase(Locale.ROOT), 0)
-            Log.e("Error", "false")
             return false
         }
-        Log.e("Error", "true")
         return true
     }
 
     private fun displayPoints(player: String): String {
-        var x = db.playerDao().getPlayersPoint(db.playerDao().getPlayerName(player)).toString()
-        Log.e("Error", x)
-        return x
+        return db.playerDao().getPlayersPoint(db.playerDao().getPlayerName(player)).toString()
     }
 
     override fun restartView() {
